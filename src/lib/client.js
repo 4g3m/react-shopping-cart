@@ -11,8 +11,8 @@ let products = [
   },
   {
     id: uuid(),
-    title: "Apple 10.5-Inch iPad Pro",
-    quantity: 0,
+    title: 'Apple 10.5-Inch iPad Pro',
+    quantity: 10,
     price: 649.99
   },
   {
@@ -81,6 +81,7 @@ const client = {
       }
     });
   },
+
   delete: url => {
     return new Promise((resolve, reject) => {
       let id = url.split("/")[3];

@@ -22,7 +22,11 @@ class EditProductForm extends React.Component {
       .then((product) => {
         store.dispatch({product, type:'UPDATE_PRODUCT'})
         });
-      this.props.onEditClick()
+      this.props.onEditFormToggleClick()
+    }
+
+    handleEditCancel = () => {
+      this.props.onEditFormToggleClick()
     }
 
     render() {
@@ -47,7 +51,7 @@ class EditProductForm extends React.Component {
 
               <div className="actions form-actions">
                 <a className="button" onClick={this.handleEditSubmit} >Update</a>
-                <a className="button">Cancel</a>
+                <a className="button" onClick={this.handleEditCancel}>Cancel</a>
               </div>
             </form>
           </div>

@@ -8,7 +8,7 @@ class EditableProduct extends React.Component {
     editing: false,
   }
 
-  handleEditClick = () => {
+  handleEditFormToggle = () => {
     this.setState({editing: !this.state.editing})
   }
 
@@ -17,11 +17,11 @@ class EditableProduct extends React.Component {
       <div className="product">
         <Product
          {...this.props}
-         onEditClick={this.handleEditClick}
+         onEditClick={this.handleEditFormToggle}
         />
         {this.state.editing ?  (<EditProductForm
           id={this.props.id}
-          onEditClick={this.handleEditClick}
+          onEditFormToggleClick={this.handleEditFormToggle}
           product={{title: this.props.title, price: this.props.price, quantity: this.props.quantity}}
           />) : ''}
       </div>

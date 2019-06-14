@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import ProductsList from '../components/ProductsList';
-import products from './productsMock';
+import store from '../lib/store';
 
 describe('ProductsList', () => {
-  let wrapper = shallow(
-    <ProductsList products={products} />
-  );
+  let editableProducts;
+  let wrapper; 
+
+  beforeEach( () => {
+    editableProducts  = store.getState().products;
+    wrapper = shallow(
+      <ProductsList products={editableProducts} />
+    );
+  });
 
   it('has a <div> `product-listing` element', () => {
     let div = wrapper.find('div.product-listing').first()
@@ -17,8 +23,9 @@ describe('ProductsList', () => {
   });
 
   it('EditableProduct count agrees with number of `products`', () => {
+  let editableProducts = store.getState().products;
     expect(
       wrapper.find('EditableProduct').length
-    ).toEqual(products.length)
+    ).toEqual(editableProducts.length)
   });
 });

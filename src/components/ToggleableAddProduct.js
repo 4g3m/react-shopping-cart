@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import store from '../lib/store'
-import client from '../lib/client'
+import store from '../lib/store';
+import client from '../lib/client';
 
 class ToggleableAddProduct extends Component {
 
@@ -10,22 +10,27 @@ class ToggleableAddProduct extends Component {
       quantity: '',
   }
 
+  resetState = () => {
+    this.setState({
+      title: '',
+      price: '',
+      quantity: '',
+    })
+  };
+
   onFormSubmit = (e) => {
     e.preventDefault();
 
-    let newProduct = {...this.state }
+    let newProduct = {...this.state };
 
     client.post('/api/products', newProduct)
       .then(product => {
         store.dispatch({product, type: 'ADD_PRODUCT'})
     })
 
-    this.setState({
-      title: '',
-      price: '',
-      quantity: '',
-    })
+    this.resetState();
   }
+
 
   onValueChange = (e) => {
     let name = e.target.name
@@ -66,9 +71,11 @@ class ToggleableAddProduct extends Component {
         <div className="actions form-actions">
           <a className="button"
             id='add'
-            onClick={this.onFormSubmit}
-          >Add</a>
-          <a className="button">Cancel</a>
+            onClick={this.onFormSubmit} >
+            Add</a>
+          <a className="button"
+             onClick={this.resetState} >
+            Cancel</a>
         </div>
       </form>
     </div>

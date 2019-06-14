@@ -1,13 +1,18 @@
 import React from 'react';
-import client from '../lib/client'
-import store from '../lib/store'
-
+import client from '../lib/client';
+import store from '../lib/store';
 
 const Product = (props) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    props.onAddItemToCart(props.id);
+    if (props.quantity === 0) {
+      alert('Item is out of stock');
+      return;
+    }
+
+    let product  = { id: props.id, title: props.title, price: props.price };
+    store.dispatch({product, type: 'ADD_PRODUCT_TO_CART'});
   };
 
   const handleDeleteFromList = (e) => {
